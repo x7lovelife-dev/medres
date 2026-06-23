@@ -4,3 +4,13 @@ args = ["mcp-server/server.py"]
 cwd = "C:/Users/ALT147/Documents/多角色分析自动流程拆解"
 startup_timeout_sec = 20
 tool_timeout_sec = 120
+
+[mcp_servers.pharma_research.env]
+HTTP_PROXY = ""
+HTTPS_PROXY = ""
+ALL_PROXY = ""
+http_proxy = ""
+https_proxy = ""
+all_proxy = ""
+NO_PROXY = "*"
+no_proxy = "*"

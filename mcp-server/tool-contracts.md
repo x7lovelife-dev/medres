@@ -159,3 +159,31 @@
   }
 }
 ```
+
+## search_patents
+
+```json
+{
+  "name": "search_patents",
+  "input": {
+    "query": "antibody cancer",
+    "jurisdictions": ["US"],
+    "date_range": { "from": "2018-01-01", "to": "2026-06-23" },
+    "max_results": 25
+  },
+  "output_item": {
+    "source": "PatentsView",
+    "id": "US patent number",
+    "jurisdiction": "US",
+    "title": "Patent title",
+    "abstract": "Patent abstract",
+    "publication_date": "2025-01-01",
+    "assignees": ["Organization"],
+    "inventors": ["Inventor Name"],
+    "url": "https://patents.google.com/patent/US...",
+    "evidence_note": "Why this patent matters"
+  }
+}
+```
+
+当前实现为美国专利元数据原型，公共源优先尝试 PatentsView。若结构化接口超时、不可达或返回非 JSON，工具返回 Google Patents、Espacenet、PatentsView 检索入口和 `warnings`，不终止整个研究流程。后续可扩展 EPO OPS、Lens 或稳定 PatentsView 新接口作为多源专利检索。
