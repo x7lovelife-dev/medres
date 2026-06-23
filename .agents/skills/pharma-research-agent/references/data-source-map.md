@@ -11,15 +11,26 @@
 | OpenAlex | 学术图谱、作者、机构、引用关系 | OpenAlex ID/DOI | 领域趋势、机构和引用分析 |
 | Semantic Scholar | 引用、相关论文、影响力指标 | S2 ID/DOI | 相关文献扩展 |
 | bioRxiv / medRxiv | 生命科学和医学预印本 | DOI | 最新机制和临床前沿 |
+| Google Patents Public Datasets / BigQuery | 结构化专利书目信息、专利族、申请人、CPC、时间趋势和 landscape 统计 | publication number/family ID/BigQuery row | 专利 landscape、批量统计、申请人和技术方向分析 |
+| 权威会议与重磅报道网页 | ASCO, ESMO, AACR, ADA, AHA, EHA, WCLC 等会议官网、摘要库、新闻稿和少数重磅媒体报道 | URL/会议摘要号/发布日期 | 最新重要研究、监管前动态、尚未进入文献库的关键更新 |
+| 普通网页搜索 | 搜索引擎结果、公司新闻稿、行业媒体、机构页面 | URL/发布日期/发布机构 | 低优先级补充；用于查漏、定位原始来源或发现待验证线索 |
 | 用户上传文档 | 内部 PDF、Word、Excel、PPT、图片、表格 | 文件路径/页码/表格名 | 内部资料和非公开材料 |
 
 ## 主题到数据源
 
 | 主题 | 必选数据源 | 推荐补充源 |
 | --- | --- | --- |
-| 靶点竞争格局 | PubMed, ClinicalTrials.gov, OpenAlex | PMC, Europe PMC, Semantic Scholar, 用户上传管线表 |
-| 药物临床对比 | ClinicalTrials.gov, PubMed, openFDA Label | PMC, Europe PMC, Crossref, 会议摘要, 公司公告, 用户上传临床资料 |
-| 不良事件分析 | openFDA FAERS, openFDA Label, PubMed | PMC, Europe PMC, medRxiv, 用户上传安全性资料 |
+| 靶点竞争格局 | PubMed, ClinicalTrials.gov, OpenAlex | PMC, Europe PMC, Semantic Scholar, 权威会议与重磅报道网页, 用户上传管线表 |
+| 药物临床对比 | ClinicalTrials.gov, PubMed, openFDA Label | PMC, Europe PMC, Crossref, ASCO/ESMO/AACR/ADA 等会议摘要, 公司公告, 用户上传临床资料 |
+| 不良事件分析 | openFDA FAERS, openFDA Label, PubMed | PMC, Europe PMC, medRxiv, 监管机构或权威会议网页, 用户上传安全性资料 |
+
+## 来源优先级
+
+1. 优先使用可结构化、可稳定追溯的数据源：PubMed/PMC、ClinicalTrials.gov、openFDA、Crossref、OpenAlex、Semantic Scholar、bioRxiv/medRxiv 和用户上传材料。
+2. 权威会议和重磅报道网页属于高价值补充源。当 ASCO、ESMO、AACR、ADA、AHA、EHA、WCLC 等会议官网、会议摘要库、期刊同步发布页、监管机构公告或少数重磅媒体报道披露关键更新时，可以提升优先级，并尽量追溯到会议摘要号、NCT ID、DOI、公司公告或监管文件。
+3. Google Patents Public Datasets / BigQuery 属于结构化专利补充源，专利 landscape 或批量统计时优先级高于普通网页和 Google Patents 网页核验；使用前应限定查询范围并记录预计扫描量。
+4. 普通网页搜索默认低优先级，只用于查漏补缺、发现线索或定位原始来源。网页结果不得单独支撑关键结论，除非来源本身是权威机构、会议官网、监管机构、期刊、公司正式公告或具有明确可追溯 ID 的重磅报道。
+5. 使用网页结果时必须记录 URL、发布机构、发布日期和检索日期；如果网页内容无法追溯到原始研究或官方材料，标注为“待补充证据”。
 
 ## 检索策略
 
@@ -27,9 +38,12 @@
 2. 再用同义词和实体别名扩展：通用名、商品名、研发代号、靶点别名、MeSH 词。
 3. 临床对比先按“直接头对头试验”检索：药物A + 药物B + 适应症 + 治疗线 + 方案关键词；再按每个核心试验代号/NCT ID 精准检索。
 4. 没有成熟直接结果时，建立间接证据集合，并标注为什么纳入：同治疗线、同人群、同组织学、相似方案、或仅背景。
-5. 对文献结果按 DOI、PMID、标题标准化去重。
-6. 对临床试验按 NCT ID 去重。
-7. 对不良事件按药物名和反应术语聚合，保留查询条件。
+5. 结构化来源检索不足或用户要求最新动态时，再使用网页搜索；优先检索权威会议、监管机构、期刊和公司公告，普通网页结果只作为线索。
+6. 专利 landscape 任务优先使用结构化专利源；Google Patents Public Datasets / BigQuery 查询必须避免未限定全表扫描，先按申请人、CPC、关键词、jurisdiction、priority date 或 publication date 缩小范围。
+7. 对文献结果按 DOI、PMID、标题标准化去重。
+8. 对临床试验按 NCT ID 去重。
+9. 对不良事件按药物名和反应术语聚合，保留查询条件。
+10. 对网页结果按 URL、标题、发布机构和发布日期去重，并标注是否已追溯到原始研究或官方材料。
 
 ## 临床对比核心试验集合规则
 
