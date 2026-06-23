@@ -1,0 +1,6 @@
+[mcp_servers.pharma_research]
+command = "python"
+args = ["mcp-server/server.py"]
+cwd = "C:/Users/ALT147/Documents/多角色分析自动流程拆解"
+startup_timeout_sec = 20
+tool_timeout_sec = 120
