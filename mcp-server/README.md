@@ -30,7 +30,7 @@ Codex 配置示例见 `.codex/config.example.toml`。复制到项目级 `.codex/
 | `search_clinical_trials` | 已实现 | ClinicalTrials.gov API v2 | 查询试验设计、阶段、状态、终点、申办方 |
 | `search_drug_labels` | 已实现 | openFDA Drug Label | 查询适应症、警告、不良反应、剂量等标签字段 |
 | `search_adverse_events` | 已实现 | openFDA Drug Event / FAERS | 查询报告总数和年度趋势；只作安全性信号，不作因果判断 |
-| `search_patents` | 已实现原型 | PatentsView | 查询美国专利元数据；当前公共源偶发超时，失败时返回 warning |
+| `search_patents` | 已实现原型 | PatentsView + fallback links | 查询美国专利元数据；当前公共源偶发超时，失败时返回 warning |
 
 ## 规划中工具
 
@@ -60,7 +60,7 @@ Codex 配置示例见 `.codex/config.example.toml`。复制到项目级 `.codex/
 ## 实现优先级
 
 1. 扩展 `search_literature`：接 OpenAlex、Semantic Scholar、bioRxiv/medRxiv。
-2. 增强 `search_patents`：接 EPO OPS、Google Patents 或 Lens 等更完整来源；如需账号/API key，再放入 MCP env。
+2. 增强 `search_patents`：接 EPO OPS、Lens 或稳定 PatentsView 新接口；专利 landscape 和批量统计优先接 Google Patents Public Datasets / BigQuery，并在执行前返回预计扫描量、SQL 条件和费用风险提示。
 3. 实现 `fetch_publication_detail`。
 4. 实现 `normalize_entities` 和 `rank_evidence`。
 
