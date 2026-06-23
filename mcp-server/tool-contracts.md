@@ -186,4 +186,4 @@
 }
 ```
 
-当前实现为美国专利元数据原型，公共源优先尝试 PatentsView。若结构化接口超时、不可达或返回非 JSON，工具返回 Google Patents、Espacenet、PatentsView 检索入口和 `warnings`，不终止整个研究流程。后续可扩展 EPO OPS、Lens 或稳定 PatentsView 新接口作为多源专利检索。
+当前实现为美国专利元数据原型，公共源优先尝试 PatentsView。若结构化接口超时、不可达或返回非 JSON，工具返回 Google Patents、Espacenet、PatentsView 检索入口和 `warnings`，不终止整个研究流程。后续可扩展 EPO OPS、Lens 或稳定 PatentsView 新接口作为多源专利检索；专利 landscape、申请人趋势和批量统计优先接入 Google Patents Public Datasets / BigQuery，并在执行前返回预计扫描量、SQL 条件和费用风险提示。
